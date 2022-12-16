@@ -1,13 +1,13 @@
 # Windows Terminal
 
-> settings.json
+1. settings.json
 
 ## PowerShell
 
-> Install powershell and update
-> move Microsoft.PowerShel_profile.ps1 to Users/{user}/Documents/PowerShell
+1. Install powershell and update
+2. move Microsoft.PowerShel_profile.ps1 to Users/{user}/Documents/PowerShell
 
 ## Oh My Posh
 
-> Install Oh My Posh
-> move catppuccin.omp.json to the directory on the powershell file
+1. Install Oh My Posh
+2. move catppuccin.omp.json to the directory on the powershell file
