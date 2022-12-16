@@ -27,6 +27,9 @@ Set-PSReadLineOption -PredictionSource History
 Set-PSFzfOption -PSReadlineChordProvider 'Ctrl+f' -PSReadlineChordReverseHistory 'Ctrl+r'
 
 Set-Alias vim nvim
+Set-Alias v nvim
+Set-Alias touch New-Item
+Set-Alias rm Remove-Item
 
 function which ($command) {
 	Get-Command -Name $command -ErrorAction SilentlyContinue |

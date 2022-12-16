@@ -24,6 +24,10 @@
 				"splitMode": "duplicate"
 			},
 			"keys": "alt+shift+d"
+		},
+		{
+			"command": "togglePaneZoom",
+			"keys": "ctrl+shift+s"
 		}
 	],
 	"copyFormatting": "none",
@@ -34,9 +38,11 @@
 	"profiles": {
 		"defaults": {
 			"colorScheme": "One Half Dark (modded)",
+			"cursorShape": "bar",
 			"font": {
-				"face": "Hack NF",
-				"size": 12
+				"face": "JetBrainsMonoNL Nerd Font Mono",
+				"size": 12,
+				"weight": "semi-bold"
 			},
 			"opacity": 50,
 			"useAcrylic": true
