@@ -1,3 +1,5 @@
+https://www.youtube.com/watch?v=5-aK2_WwrmM
+
 # Windows Terminal
 
 1. settings.json
