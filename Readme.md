@@ -1,4 +1,6 @@
-https://www.youtube.com/watch?v=5-aK2_WwrmM
+# My Terminal Settings
+
+![GitHub](https://img.shields.io/github/license/thomasluizon/terminal-settings)
 
 # Windows Terminal
 
@@ -20,3 +22,5 @@ https://www.youtube.com/watch?v=5-aK2_WwrmM
 
 1. Install Oh My Posh
 2. move catppuccin.omp.json to the directory on the powershell file
+
+- https://www.youtube.com/watch?v=5-aK2_WwrmM
