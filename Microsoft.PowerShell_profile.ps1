@@ -1,4 +1,4 @@
-oh-my-posh init pwsh --config 'C:\Users\thoma\AppData\Local\Programs\oh-my-posh\themes\catppuccin.omp.json' | Invoke-Expression
+oh-my-posh init pwsh --config 'C:\Users\thoma\AppData\Local\Programs\oh-my-posh\themes\clean-detailed.omp.json' | Invoke-Expression
 
 Import-Module Terminal-Icons
 Import-Module PSFzf
