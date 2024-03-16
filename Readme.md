@@ -18,9 +18,6 @@
    `scoop install fzf`
    `Install-Module -Name PSFzf -Scope CurrentUser -Force`
 3. write $PROFILE on powershell and move Microsoft.PowerShel_profile.ps1 to the directory
-
-## Oh My Posh
-
-1. move clean-detailed.omp.json to the directory on the powershell file
+4. Adjust the path to oh my posh in the Microsoft.PowerShel_profile.ps1 file
 
 -  https://www.youtube.com/watch?v=5-aK2_WwrmM
