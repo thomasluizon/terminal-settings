@@ -19,7 +19,7 @@
 4. **Install oh my posh:**
 
     ```sh
-    scoop install https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/oh-my-posh.json
+    winget install JanDeDobbeleer.OhMyPosh -s winget
     ```
 
 ### PowerShell
