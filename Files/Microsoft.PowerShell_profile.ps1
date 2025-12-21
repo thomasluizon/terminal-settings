@@ -1,39 +1,44 @@
-oh-my-posh init pwsh --config 'C:\Users\thoma\AppData\Local\Programs\oh-my-posh\themes\clean-detailed.omp.json' | Invoke-Expression
+# Oh My Posh initialization - using environment variable for theme path
+$ohMyPoshTheme = if ($env:OH_MY_POSH_THEME) { $env:OH_MY_POSH_THEME } else { "$PSScriptRoot\clean-detailed.omp.json" }
+oh-my-posh init pwsh --config $ohMyPoshTheme | Invoke-Expression
 
-Import-Module Terminal-Icons
-Import-Module PSFzf
+# Import modules only if available (faster startup)
+$modules = @('Terminal-Icons', 'PSFzf', 'PSReadLine')
+foreach ($module in $modules) {
+    if (Get-Module -ListAvailable -Name $module) {
+        Import-Module $module -ErrorAction SilentlyContinue
+    }
+}
 
-#Imports PSReadLine
-Import-Module PSReadLine
+# PSReadLine configuration (only if module is loaded)
+if (Get-Module -Name PSReadLine) {
+    Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
+    Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
+    Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
+    Set-PSReadLineOption -HistorySearchCursorMovesToEnd
+    Set-PSReadLineOption -ShowToolTips
+    Set-PSReadLineOption -PredictionSource History
+}
 
-#Tab - Gives a menu of suggestions
-Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
+# PSFzf configuration (only if module is loaded)
+if (Get-Module -Name PSFzf) {
+    Set-PSFzfOption -PSReadlineChordProvider 'Ctrl+f' -PSReadlineChordReverseHistory 'Ctrl+r'
+}
 
-#UpArrow will show the most recent command
-Set-PSReadLineKeyHandler -Key UpArrow -Function HistorySearchBackward
+# Aliases (only create if commands exist)
+if (Get-Command nvim -ErrorAction SilentlyContinue) {
+    Set-Alias -Name vim -Value nvim -Force
+    Set-Alias -Name v -Value nvim -Force
+}
 
-#DownArrow will show the least recent command
-Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
+# Utility aliases
+Set-Alias -Name touch -Value New-Item -Force
+Set-Alias -Name ll -Value Get-ChildItem -Force
 
-#During auto completion, pressing arrow key up or down will move the cursor to the end of the completion
-Set-PSReadLineOption -HistorySearchCursorMovesToEnd
-
-#Shows tooltip during completion
-Set-PSReadLineOption -ShowToolTips
-
-#Gives completions/suggestions from historical commands
-Set-PSReadLineOption -PredictionSource History
-
-Set-PSFzfOption -PSReadlineChordProvider 'Ctrl+f' -PSReadlineChordReverseHistory 'Ctrl+r'
-
-Set-Alias vim nvim
-Set-Alias v nvim
-Set-Alias touch New-Item
-Set-Alias rm Remove-Item
-
+# Unix-like 'which' command
 function which ($command) {
-	Get-Command -Name $command -ErrorAction SilentlyContinue |
-		Select-Object -ExpandProperty Path -ErrorAction SilentlyContinue
+    Get-Command -Name $command -ErrorAction SilentlyContinue |
+        Select-Object -ExpandProperty Path -ErrorAction SilentlyContinue
 }
 
 # Import the Chocolatey Profile that contains the necessary code to enable

@@ -1,56 +1,115 @@
-# My Terminal Settings
+# Terminal Settings
 
-## GitHub
+A complete setup for a modern, beautiful PowerShell terminal with Oh My Posh, icons, fuzzy finding, and more.
 
-### Windows Terminal
+## Prerequisites
 
-1. **Install scoop:**
+Install the latest version of PowerShell:
 
-    ```sh
-    irm get.scoop.sh | iex
-    ```
+```powershell
+winget install --id Microsoft.PowerShell --source winget
+```
 
-2. **Install fonts**
+After installation, **restart your terminal** and use PowerShell 7+ for all subsequent commands.
 
-3. **Copy settings:**
+## Quick Installation
 
-    - Copy the content of `settings.json` to your Windows Terminal `settings.json`.
+Run all commands below in PowerShell (as Administrator recommended):
 
-4. **Install oh my posh:**
+### 1. Install Core Tools
 
-    ```sh
-    winget install JanDeDobbeleer.OhMyPosh -s winget
-    ```
+```powershell
+# Install Scoop (package manager)
+irm get.scoop.sh -outfile 'install.ps1'
+.\install.ps1 -RunAsAdmin
+Remove-Item 'install.ps1'
 
-### PowerShell
+# Install Oh My Posh
+winget install JanDeDobbeleer.OhMyPosh -s winget
 
-1. **Install PowerShell and update:**
+# Install fzf (fuzzy finder)
+scoop install fzf
+```
 
-    - Ensure PowerShell is installed and up-to-date.
+### 2. Install PowerShell Modules
 
-2. **Run these commands:**
+```powershell
+Install-Module -Name Terminal-Icons -Repository PSGallery -Force
+Install-Module -Name z -Force
+Install-Module -Name PSFzf -Scope CurrentUser -Force
+Install-Module -Name PSReadLine -Force -SkipPublisherCheck
+```
 
-    ```sh
-    Install-Module -Name Terminal-Icons -Repository PSGallery -Force
-    Install-Module -Name z -Force
-    scoop install fzf
-    Install-Module -Name PSFzf -Scope CurrentUser -Force
-    ```
+### 3. Install Nerd Font
 
-3. **Update your PowerShell profile:**
+```powershell
+# Install the JetBrains Mono Nerd Font
+scoop bucket add nerd-fonts
+scoop install JetBrainsMono-NF
+```
 
-    - Run `$PROFILE` in PowerShell to find the profile path.
+Or manually install from the `Font/` directory.
 
-    - Move `Microsoft.PowerShell_profile.ps1` to the directory returned by `$PROFILE`.
+### 4. Setup Configuration Files
 
-4. **Adjust the path:**
+```powershell
+# Clone or download this repo, then navigate to it
+cd path\to\terminal-settings
 
-    - Edit `Microsoft.PowerShell_profile.ps1` to set the correct path to `oh my posh`.
+# Copy PowerShell profile
+$profileDir = Split-Path $PROFILE
+if (!(Test-Path $profileDir)) { New-Item -Path $profileDir -ItemType Directory -Force }
+Copy-Item -Path "Files\Microsoft.PowerShell_profile.ps1" -Destination $PROFILE -Force
 
-### Reference
+# Copy Oh My Posh theme
+Copy-Item -Path "Files\clean-detailed.omp.json" -Destination $profileDir -Force
 
-- For more detailed instructions, refer to [this video](https://www.youtube.com/watch?v=5-aK2_WwrmM).
+# Copy Windows Terminal settings (backup your current settings first!)
+$wtSettingsPath = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+Copy-Item -Path "Files\settings.json" -Destination $wtSettingsPath -Force
+```
 
----
+### 5. (Optional) Set Environment Variable for Custom Theme
 
-This `README.md` contains personal settings for setting up Windows Terminal and PowerShell. It is intended for private use only.
+If you want to use a different Oh My Posh theme:
+
+```powershell
+[System.Environment]::SetEnvironmentVariable('OH_MY_POSH_THEME', 'C:\path\to\your\theme.omp.json', 'User')
+```
+
+Otherwise, the profile will use the included `clean-detailed.omp.json` theme automatically.
+
+## What's Included
+
+- **Oh My Posh**: Beautiful prompt with git status, system info, and execution time
+- **Terminal Icons**: Colorful file/folder icons in directory listings
+- **PSReadLine**: Enhanced command-line editing with history search
+- **PSFzf**: Fuzzy finding for files and command history (Ctrl+F, Ctrl+R)
+- **z**: Quick directory jumping based on frecency
+- **Custom aliases**: `vim`, `v`, `touch`, `ll`, and Unix-like `which` command
+
+## Features
+
+- Tab completion with menu
+- Up/Down arrow for command history search
+- Prediction suggestions from history
+- Acrylic transparency effect
+- Custom color scheme (One Half Dark modded)
+- Git integration in prompt
+
+## Troubleshooting
+
+**Script execution policy error?**
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+**Oh My Posh not found?**
+Restart your terminal after installation or add to PATH manually.
+
+**Font not rendering correctly?**
+Make sure you installed a Nerd Font and set it in Windows Terminal settings.
+
+## Reference
+
+Based on [this video tutorial](https://www.youtube.com/watch?v=5-aK2_WwrmM) with improvements for easier installation.
