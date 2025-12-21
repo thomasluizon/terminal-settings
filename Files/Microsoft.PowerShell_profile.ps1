@@ -1,6 +1,18 @@
-# Oh My Posh initialization - using environment variable for theme path
-$ohMyPoshTheme = if ($env:OH_MY_POSH_THEME) { $env:OH_MY_POSH_THEME } else { "$PSScriptRoot\clean-detailed.omp.json" }
-oh-my-posh init pwsh --config $ohMyPoshTheme | Invoke-Expression
+# Oh My Posh initialization - using environment variable or default theme
+if ($env:OH_MY_POSH_THEME) {
+    $ohMyPoshTheme = $env:OH_MY_POSH_THEME
+} elseif (Test-Path "$PSScriptRoot\clean-detailed.omp.json") {
+    $ohMyPoshTheme = "$PSScriptRoot\clean-detailed.omp.json"
+} else {
+    # Fallback to a built-in theme
+    $ohMyPoshTheme = "$env:POSH_THEMES_PATH\clean-detailed.omp.json"
+}
+
+if (Test-Path $ohMyPoshTheme) {
+    oh-my-posh init pwsh --config $ohMyPoshTheme | Invoke-Expression
+} else {
+    Write-Host "Warning: Oh My Posh theme not found at $ohMyPoshTheme" -ForegroundColor Yellow
+}
 
 # Import modules only if available (faster startup)
 $modules = @('Terminal-Icons', 'PSFzf', 'PSReadLine')
@@ -48,5 +60,5 @@ function which ($command) {
 # See https://ch0.co/tab-completion for details.
 $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 if (Test-Path($ChocolateyProfile)) {
-  Import-Module "$ChocolateyProfile"
+    Import-Module "$ChocolateyProfile"
 }

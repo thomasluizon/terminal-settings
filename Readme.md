@@ -99,6 +99,13 @@ Otherwise, the profile will use the included `clean-detailed.omp.json` theme aut
 
 ## Troubleshooting
 
+**CONFIG ERROR on startup?**
+The Oh My Posh theme file is missing. Copy it to your profile directory:
+```powershell
+$profileDir = Split-Path $PROFILE
+Copy-Item -Path "Files\clean-detailed.omp.json" -Destination $profileDir -Force
+```
+
 **Script execution policy error?**
 ```powershell
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
@@ -109,6 +116,9 @@ Restart your terminal after installation or add to PATH manually.
 
 **Font not rendering correctly?**
 Make sure you installed a Nerd Font and set it in Windows Terminal settings.
+
+**PSReadLine virtual terminal error?**
+This is a warning when running PowerShell through certain contexts (like git bash or redirected output). It's safe to ignore or disable that specific option in the profile.
 
 ## Reference
 
