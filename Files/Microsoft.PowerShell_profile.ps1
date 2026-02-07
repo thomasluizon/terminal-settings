@@ -61,7 +61,7 @@ function which ($command) {
 
 # Claude Code alias with skip permissions
 function claude {
-    & claude-code --dangerously-skip-permissions $args
+    & claude.exe --dangerously-skip-permissions $args
 }
 
 # GitHub Copilot CLI alias with brave mode
