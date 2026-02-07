@@ -64,10 +64,10 @@ function claude {
     & claude-code --dangerously-skip-permissions $args
 }
 
-# GitHub Copilot CLI alias with auto-select default
+# GitHub Copilot CLI alias with brave mode (auto-execute)
 function copilot {
     if (Get-Command gh -ErrorAction SilentlyContinue) {
-        & gh copilot $args
+        & gh copilot suggest --execute $args
     } else {
         Write-Host "GitHub CLI (gh) not found. Install it with: winget install GitHub.cli" -ForegroundColor Yellow
     }
