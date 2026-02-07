@@ -61,12 +61,12 @@ function which ($command) {
 
 # Claude Code alias with skip permissions
 function claude {
-    & claude.exe --dangerously-skip-permissions $args
+    claude --dangerously-skip-permissions $args
 }
 
 # GitHub Copilot CLI alias with brave mode
 function copilot {
-    & copilot.exe --execute $args
+    copilot --execute $args
 }
 
 # Import the Chocolatey Profile that contains the necessary code to enable
