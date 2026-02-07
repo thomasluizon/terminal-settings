@@ -64,13 +64,9 @@ function claude {
     & claude-code --dangerously-skip-permissions $args
 }
 
-# GitHub Copilot CLI alias with brave mode (auto-execute)
+# GitHub Copilot CLI alias with brave mode
 function copilot {
-    if (Get-Command gh -ErrorAction SilentlyContinue) {
-        & gh copilot suggest --execute $args
-    } else {
-        Write-Host "GitHub CLI (gh) not found. Install it with: winget install GitHub.cli" -ForegroundColor Yellow
-    }
+    & copilot.exe --execute $args
 }
 
 # Import the Chocolatey Profile that contains the necessary code to enable
