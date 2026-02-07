@@ -43,12 +43,17 @@ Install-Module -Name PSReadLine -Force -SkipPublisherCheck
 ### 3. Install Nerd Font
 
 ```powershell
-# Install the JetBrains Mono Nerd Font
+# Add nerd-fonts bucket (if not already added)
 scoop bucket add nerd-fonts
+
+# Install the JetBrains Mono Nerd Font
 scoop install JetBrainsMono-NF
 ```
 
-Or manually install from the `Font/` directory.
+After installation, set the font in Windows Terminal:
+1. Open Windows Terminal Settings (Ctrl+,)
+2. Go to Profiles → Defaults → Appearance
+3. Set Font face to "JetBrainsMono Nerd Font"
 
 ### 4. Setup Configuration Files
 
@@ -86,13 +91,19 @@ Otherwise, the profile will use the included `clean-detailed.omp.json` theme aut
 - **PSReadLine**: Enhanced command-line editing with history search
 - **PSFzf**: Fuzzy finding for files and command history (Ctrl+F, Ctrl+R)
 - **z**: Quick directory jumping based on frecency
-- **Custom aliases**: `vim`, `v`, `touch`, `ll`, and Unix-like `which` command
+- **Custom aliases**:
+  - `vim`, `v` → nvim
+  - `touch`, `ll` → Unix-like commands
+  - `which` → Find command path
+  - `claude` → Claude Code with auto-skip permissions
+  - `copilot` → GitHub Copilot CLI wrapper
 
 ## Features
 
 - Tab completion with menu
 - Up/Down arrow for command history search
 - Prediction suggestions from history
+- Standard clipboard shortcuts: **Ctrl+C** (copy), **Ctrl+V** (paste), **Ctrl+X** (cut), **Ctrl+A** (select all)
 - Acrylic transparency effect
 - Custom color scheme (One Half Dark modded)
 - Git integration in prompt

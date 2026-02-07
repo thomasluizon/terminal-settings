@@ -30,6 +30,12 @@ if (Get-Module -Name PSReadLine) {
     Set-PSReadLineOption -HistorySearchCursorMovesToEnd
     Set-PSReadLineOption -ShowToolTips
     Set-PSReadLineOption -PredictionSource History
+
+    # Standard clipboard keybindings (Ctrl+X, Ctrl+A, Ctrl+V)
+    Set-PSReadLineKeyHandler -Chord "Ctrl+v" -Function Paste
+    Set-PSReadLineKeyHandler -Chord "Ctrl+c" -Function Copy
+    Set-PSReadLineKeyHandler -Chord "Ctrl+x" -Function Cut
+    Set-PSReadLineKeyHandler -Chord "Ctrl+a" -Function SelectAll
 }
 
 # PSFzf configuration (only if module is loaded)
@@ -51,6 +57,20 @@ Set-Alias -Name ll -Value Get-ChildItem -Force
 function which ($command) {
     Get-Command -Name $command -ErrorAction SilentlyContinue |
         Select-Object -ExpandProperty Path -ErrorAction SilentlyContinue
+}
+
+# Claude Code alias with skip permissions
+function claude {
+    & claude-code --dangerously-skip-permissions $args
+}
+
+# GitHub Copilot CLI alias with auto-select default
+function copilot {
+    if (Get-Command gh -ErrorAction SilentlyContinue) {
+        & gh copilot $args
+    } else {
+        Write-Host "GitHub CLI (gh) not found. Install it with: winget install GitHub.cli" -ForegroundColor Yellow
+    }
 }
 
 # Import the Chocolatey Profile that contains the necessary code to enable
