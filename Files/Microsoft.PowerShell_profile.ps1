@@ -59,9 +59,9 @@ function which ($command) {
         Select-Object -ExpandProperty Path -ErrorAction SilentlyContinue
 }
 
-# Claude Code alias with skip permissions
+# Claude Code alias with brain context and skip permissions
 function claude {
-    claude --dangerously-skip-permissions $args
+    claude.exe --dangerously-skip-permissions --add-dir "C:\thomas-brain" @args
 }
 
 # GitHub Copilot CLI alias with brave mode
