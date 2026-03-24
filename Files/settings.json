@@ -24,6 +24,13 @@
 		{
 			"command": "togglePaneZoom",
 			"keys": "ctrl+shift+s"
+		},
+		{
+			"command": {
+				"action": "sendInput",
+				"input": "\n"
+			},
+			"keys": "shift+enter"
 		}
 	],
 	"copyFormatting": "none",
