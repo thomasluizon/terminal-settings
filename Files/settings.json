@@ -1,4 +1,4 @@
-{
+﻿{
 	"$help": "https://aka.ms/terminal-documentation",
 	"$schema": "https://aka.ms/terminal-profiles-schema",
 	"actions": [
@@ -61,7 +61,7 @@
 			},
 			{
 				"colorScheme": "xcad",
-				"commandline": "cmd.exe /k %CMDER_ROOT%\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\vendor\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\init.bat",
+				"commandline": "cmd.exe /k %CMDER_ROOT%\\vendor\\init.bat",
 				"cursorShape": "filledBox",
 				"experimental.retroTerminalEffect": true,
 				"font": {

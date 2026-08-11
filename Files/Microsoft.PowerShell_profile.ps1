@@ -58,11 +58,19 @@ Set-Alias -Name touch -Value New-Item -Force
 function which ($command) {
     (Get-Command -Name $command -ErrorAction SilentlyContinue).Path
 }
-function claude  { claude.exe --dangerously-skip-permissions @args }
+# Both CLIs ship either as a native .exe or as npm shims (.cmd/.ps1), and a function
+# named after the command shadows the command itself. Resolve the external command
+# explicitly so these wrappers work either way and never recurse into themselves.
+function global:__resolve-cli ($name) {
+    Get-Command $name -CommandType Application, ExternalScript -ErrorAction SilentlyContinue | Select-Object -First 1
+}
+function claude {
+    $exe = __resolve-cli claude
+    if ($exe) { & $exe --dangerously-skip-permissions @args }
+    else { Write-Error 'claude not found on PATH' }
+}
 function codex {
-    # codex ships as codex.cmd/codex.ps1 (npm) or codex.exe (native); resolve the
-    # external command explicitly so this function never recurses into itself.
-    $exe = Get-Command codex -CommandType Application, ExternalScript -ErrorAction SilentlyContinue | Select-Object -First 1
+    $exe = __resolve-cli codex
     if ($exe) { & $exe --dangerously-bypass-approvals-and-sandbox @args }
     else { Write-Error 'codex not found on PATH' }
 }
