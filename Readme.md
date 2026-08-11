@@ -96,7 +96,7 @@ Otherwise, the profile will use the included `clean-detailed.omp.json` theme aut
   - `touch`, `ll` → Unix-like commands
   - `which` → Find command path
   - `claude` → Claude Code with auto-skip permissions
-  - `copilot` → GitHub Copilot CLI wrapper
+  - `codex` → Codex CLI with approvals/sandbox bypass
 
 ## Features
 

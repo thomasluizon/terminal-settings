@@ -59,7 +59,13 @@ function which ($command) {
     (Get-Command -Name $command -ErrorAction SilentlyContinue).Path
 }
 function claude  { claude.exe --dangerously-skip-permissions @args }
-function copilot { copilot --execute $args }
+function codex {
+    # codex ships as codex.cmd/codex.ps1 (npm) or codex.exe (native); resolve the
+    # external command explicitly so this function never recurses into itself.
+    $exe = Get-Command codex -CommandType Application, ExternalScript -ErrorAction SilentlyContinue | Select-Object -First 1
+    if ($exe) { & $exe --dangerously-bypass-approvals-and-sandbox @args }
+    else { Write-Error 'codex not found on PATH' }
+}
 
 $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 if (Test-Path $ChocolateyProfile) { Import-Module "$ChocolateyProfile" }
